@@ -8,12 +8,12 @@ public interface LinkedList<E> {
     E deleteHead() throws EmptyLinkedListException; // function to remove at head part of the list.
     E deleteRear() throws EmptyLinkedListException; // function to remove at rear part of the list.
     E delete(int position) throws EmptyLinkedListException, InvalidPositionException; // function to remove from position.
-    E deleteBykey(E key) throws EmptyLinkedListException, InvalidPositionException, KeyNotFoundException;
+    E deleteBykey(E key) throws EmptyLinkedListException, InvalidPositionException;
     NodeSingle<E> searchByKey(E key) throws KeyNotFoundException;
     void createOrderedList(E data);
-    void reverse();
+    void reverse() throws EmptyLinkedListException;
     LinkedList<E> copyList();
     boolean isEmtpy();
     int getLength();
-    void display();
+    void display() throws EmptyLinkedListException;
 }
