@@ -13,7 +13,7 @@ public interface LinkedList<E> {
     void createOrderedList(E data);
     void reverse() throws EmptyLinkedListException;
     LinkedList<E> copyList();
-    boolean isEmtpy();
+    boolean isEmpty();
     int getLength();
     void display() throws EmptyLinkedListException;
 }

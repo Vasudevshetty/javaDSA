@@ -40,7 +40,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
 
     // insert at head.
     public void insertRear(E data) {
-        if (this.isEmtpy()) {
+        if (this.isEmpty()) {
             insertHead(data);
             return;
         }
@@ -83,7 +83,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     } // overloaded function to accept the position and insert.
 
     public E deleteHead() throws EmptyLinkedListException {
-        if (isEmtpy())
+        if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
 
         NodeSingle<E> toDelete = this.head;
@@ -99,7 +99,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     } // function to remove at head part of the list.
 
     public E deleteRear() throws EmptyLinkedListException {
-        if (isEmtpy())
+        if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
 
         NodeSingle<E> temp = this.head;
@@ -115,9 +115,9 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     } // function to remove at rear part of the list.
 
     public E delete(int position) throws EmptyLinkedListException, InvalidPositionException {
-        if (position < 0 || position > this.length)
+        if (isEmpty())
             throw new InvalidPositionException("Invalid position to insert.\n");
-        if (isEmtpy())
+        if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
 
         if (position == 0)
@@ -139,7 +139,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     } // function to remove from position.
 
     public NodeSingle<E> searchByKey(E key) throws KeyNotFoundException {
-        if (isEmtpy())
+        if (isEmpty())
             throw new EmptyLinkedListException("No elements to search.\n");
 
         NodeSingle<E> temp = this.head;
@@ -172,7 +172,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     }
 
     public void reverse() throws EmptyLinkedListException{
-        if(isEmtpy()) throw new EmptyLinkedListException("No elements to reverse");
+        if(isEmpty()) throw new EmptyLinkedListException("No elements to reverse");
 
         NodeSingle<E> currentNode = this.head;
         NodeSingle<E> prevNode = null;
@@ -199,13 +199,13 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
         return copy;
     }
 
-    public boolean isEmtpy() {
+    public boolean isEmpty() {
         return (this.head == null && this.length == 0);
     }
 
     @Override
     public String toString() throws EmptyLinkedListException{
-        if(isEmtpy()) throw new EmptyLinkedListException("No Elements to display");
+        if(isEmpty()) throw new EmptyLinkedListException("No Elements to display");
         StringBuilder data = new StringBuilder();
         NodeSingle<E> temp = this.head;
 
@@ -221,7 +221,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     public void display() throws EmptyLinkedListException {
         NodeSingle<E> temp = this.head;
         // check whether the list is empty
-        if (isEmtpy())
+        if (isEmpty())
             throw new EmptyLinkedListException("List is empty, unable to display");
 
         System.out.println("Elements of the linked list are ,");
