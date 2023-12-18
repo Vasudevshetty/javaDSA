@@ -1,6 +1,6 @@
 package dsa.LinkedList;
 
 @FunctionalInterface
-public interface CircularLinkedList {
+public interface CircularLinkedList<E>{
     boolean isCircular();
 }
