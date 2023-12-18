@@ -138,7 +138,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
 
     } // function to remove from position.
 
-    public NodeSingle<E> searchByKey(E key) throws KeyNotFoundException {
+    public Node<E> searchByKey(E key) throws KeyNotFoundException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to search.\n");
 
@@ -152,33 +152,36 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     }
 
     public E deleteBykey(E key) throws EmptyLinkedListException, InvalidPositionException {
-        NodeSingle<E> toDelete = searchByKey(key);
+        NodeSingle<E> toDelete = (NodeSingle<E>) searchByKey(key);
         E data = toDelete.getData();
 
-        if(toDelete == this.head) return deleteHead();
-        else{
+        if (toDelete == this.head)
+            return deleteHead();
+        else {
             NodeSingle<E> temp = this.head;
-            while(temp != null && temp.getNext() != toDelete){
+            while (temp != null && temp.getNext() != toDelete) {
                 temp = temp.getNext();
             }
-            if(temp != null) temp.setNext(toDelete.getNext());
+            if (temp != null)
+                temp.setNext(toDelete.getNext());
             this.length--;
         }
         return data;
     }
 
     public void createOrderedList(E data) {
-
+        
     }
 
-    public void reverse() throws EmptyLinkedListException{
-        if(isEmpty()) throw new EmptyLinkedListException("No elements to reverse");
+    public void reverse() throws EmptyLinkedListException {
+        if (isEmpty())
+            throw new EmptyLinkedListException("No elements to reverse");
 
         NodeSingle<E> currentNode = this.head;
         NodeSingle<E> prevNode = null;
-        NodeSingle<E> nextNode; 
+        NodeSingle<E> nextNode;
 
-        while(currentNode != null){
+        while (currentNode != null) {
             nextNode = currentNode.getNext();
             currentNode.setNext(prevNode);
             prevNode = currentNode;
@@ -192,7 +195,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
 
         NodeSingle<E> temp = this.head;
 
-        while(temp != null){
+        while (temp != null) {
             copy.insertRear(temp.getData());
             temp = temp.getNext();
         }
@@ -204,13 +207,14 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     }
 
     @Override
-    public String toString() throws EmptyLinkedListException{
-        if(isEmpty()) throw new EmptyLinkedListException("No Elements to display");
+    public String toString() throws EmptyLinkedListException {
+        if (isEmpty())
+            throw new EmptyLinkedListException("No Elements to display");
         StringBuilder data = new StringBuilder();
         NodeSingle<E> temp = this.head;
 
         data.append("Elements of the linked list are \n");
-        while(temp != null){
+        while (temp != null) {
             data.append(temp.getData()).append("->");
             temp = temp.getNext();
         }
