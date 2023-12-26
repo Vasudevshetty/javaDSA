@@ -4,7 +4,7 @@ import dsa.LinkedList.NodeSingle;
 import dsa.LinkedList.SingleLinkedList;
 import dsa.Queue.Exception.QueueEmptyException;
 
-public class Queue<E> implements que<E> {
+public class Queue<E> implements Que<E> {
     private SingleLinkedList<E> que;
 
     public Queue() {
