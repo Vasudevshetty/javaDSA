@@ -1,8 +1,8 @@
-package dsa.LinkedList;
+package dsa.List;
 
-import dsa.LinkedList.Exception.EmptyLinkedListException;
-import dsa.LinkedList.Exception.InvalidPositionException;
-import dsa.LinkedList.Exception.KeyNotFoundException;
+import dsa.List.Exception.EmptyLinkedListException;
+import dsa.List.Exception.InvalidPositionException;
+import dsa.List.Exception.KeyNotFoundException;
 
 public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> {
     private NodeSingle<E> head;
@@ -89,12 +89,11 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
         NodeSingle<E> toDelete = this.head;
         E data = toDelete.getData();
 
-        setHead(toDelete.getNext());
-
         this.length--;
         if (getLength() == 0)
             setHead(null);
 
+        setHead(toDelete.getNext());
         return data;
     } // function to remove at head part of the list.
 
@@ -144,7 +143,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
 
         NodeSingle<E> temp = this.head;
         while (temp != null) {
-            if (temp.getData() == key)
+            if (temp.getData().equals(key))
                 return temp;
             temp = temp.getNext();
         }
@@ -170,7 +169,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
     }
 
     public void createOrderedList(E data) {
-        
+
     }
 
     public void reverse() throws EmptyLinkedListException {

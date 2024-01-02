@@ -1,6 +1,6 @@
-package dsa.LinkedList;
+package dsa.List;
 
-import dsa.LinkedList.Exception.*;
+import dsa.List.Exception.*;
 
 public interface LinkedList<E> {
     void insertHead(E data); // insert at head.

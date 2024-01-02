@@ -1,8 +1,8 @@
-package dsa.LinkedList;
+package dsa.List;
 
-import dsa.LinkedList.Exception.EmptyLinkedListException;
-import dsa.LinkedList.Exception.InvalidPositionException;
-import dsa.LinkedList.Exception.KeyNotFoundException;
+import dsa.List.Exception.EmptyLinkedListException;
+import dsa.List.Exception.InvalidPositionException;
+import dsa.List.Exception.KeyNotFoundException;
 
 public class DoubleLinkedList<E> extends NodeDouble<E> implements LinkedList<E> {
     private NodeDouble<E> head;
