@@ -4,7 +4,7 @@ import dsa.List.Exception.EmptyLinkedListException;
 import dsa.List.Exception.InvalidPositionException;
 import dsa.List.Exception.KeyNotFoundException;
 
-public class DoubleLinkedList<E> extends NodeDouble<E> implements LinkedList<E> {
+public class DoubleLinkedList<E> implements LinkedList<E> {
     private NodeDouble<E> head;
     private NodeDouble<E> tail;
     private int length;

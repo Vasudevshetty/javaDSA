@@ -15,7 +15,7 @@ public interface LinkedList<E> {
 
     E delete(int position) throws EmptyLinkedListException, InvalidPositionException; // function to remove from position.                                                                                 
 
-    E deleteBykey(E key) throws EmptyLinkedListException, InvalidPositionException;
+    E deleteBykey(E key) throws EmptyLinkedListException, KeyNotFoundException;
 
     Node<E> searchByKey(E key) throws KeyNotFoundException;
 

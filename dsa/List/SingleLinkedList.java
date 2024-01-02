@@ -4,7 +4,7 @@ import dsa.List.Exception.EmptyLinkedListException;
 import dsa.List.Exception.InvalidPositionException;
 import dsa.List.Exception.KeyNotFoundException;
 
-public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> {
+public class SingleLinkedList<E> implements LinkedList<E> {
     private NodeSingle<E> head;
     private int length;
 
@@ -150,7 +150,7 @@ public class SingleLinkedList<E> extends NodeSingle<E> implements LinkedList<E> 
         throw new KeyNotFoundException("key not found");
     }
 
-    public E deleteBykey(E key) throws EmptyLinkedListException, InvalidPositionException {
+    public E deleteBykey(E key) throws EmptyLinkedListException, KeyNotFoundException {
         NodeSingle<E> toDelete = (NodeSingle<E>) searchByKey(key);
         E data = toDelete.getData();
 
