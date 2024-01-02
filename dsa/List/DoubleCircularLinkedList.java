@@ -1,4 +1,4 @@
-package dsa.LinkedList;
+package dsa.List;
 public class DoubleCircularLinkedList {
     
 }

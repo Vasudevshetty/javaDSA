@@ -1,6 +1,6 @@
-package dsa.LinkedList.Main;
+package dsa.List.Main;
 
-import dsa.LinkedList.SingleLinkedList;
+import dsa.List.SingleLinkedList;
 
 public class Main {
     
