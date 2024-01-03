@@ -1,15 +1,16 @@
 package dsa.List.Main;
 
-import dsa.List.SingleCircularLinkedList;
+import dsa.List.DoubleCircularLinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        SingleCircularLinkedList<Integer> l = new SingleCircularLinkedList<>();
-        for (int i = 1; i <= 10; i++)
+        DoubleCircularLinkedList<Integer> l = new DoubleCircularLinkedList<>();
+        for (int i = 1; i <= 5; i++)
             l.insert(i, i - 1);
         System.out.println(l);
-        l.reverse();
-        l.deleteBykey(5);
-        System.out.println(l);
-  }
+        DoubleCircularLinkedList<Integer> copy = (DoubleCircularLinkedList<Integer>)l.copyList();
+        System.out.println(copy);
+        copy.reverse();;
+        System.out.println(copy);
+    }
 }
