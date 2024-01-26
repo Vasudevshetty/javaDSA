@@ -4,39 +4,67 @@ import dsa.list.Exception.EmptyLinkedListException;
 import dsa.list.Exception.InvalidPositionException;
 import dsa.list.Exception.KeyNotFoundException;
 
-public class DoubleCircularLinkedList<E> implements LinkedList<E> {
+/**
+ * The class for double circular linked list, where the nodes or connected
+ * mutually, only operations at specific postioins takes
+ * lienar time(O(K)), where k is the position and at head or tail it is constant
+ * time.
+ * and the list is circular making it easier to travese any way wanted.
+ */
+public class DoubleCircularLinkedList<E> implements LinkedList<E>, CircularLinkedList<E> {
     private NodeDouble<E> head;
     private NodeDouble<E> tail;
     private int length;
 
+    /**
+     * The funtion to get or fetch the head's refernce.
+     * 
+     * @return the refernce to head.
+     */
     public NodeDouble<E> getHead() {
         return this.head;
     }
 
+    /**
+     ** The funtion to get or fetch the tail's refernce.
+     * 
+     * @return the refernce to tail.
+     */
     public NodeDouble<E> getTail() {
         return this.tail;
     }
 
+    /** {@inheritDoc} */
     public int getLength() {
         return this.length;
     }
 
+    /**
+     * Constructs the linkedlist where the head node is considered as a dummy node,
+     * tail node points to the tail of the list.
+     * head node points to the first data ndoe of the list.
+     * length is the count of the nodes.
+     */
     public DoubleCircularLinkedList() {
         this.head = new NodeDouble<E>(null);
         this.tail = null;
         this.length = 0;
     }
 
+    /** {@inheritDoc} */
+    @Override
     public boolean isCircular() {
         if (isEmpty())
             return false;
         return this.head.getNext().getPrev() == this.tail && this.tail.getNext() == this.head.getNext();
     }
 
+    /** {@inheritDoc} */
     public boolean isEmpty() {
         return this.head.getNext() == null && this.tail == null && this.length == 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void insertHead(E data) {
         NodeDouble<E> newNode = new NodeDouble<E>(data, true);
@@ -53,8 +81,9 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         this.length++;
     }
 
+    /** {@inheritDoc} */
     @Override
-    public void insertRear(E data) {
+    public void insertTail(E data) {
         if (isEmpty()) {
             insertHead(data);
             return;
@@ -68,6 +97,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         this.length++;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void insert(E data, int position) throws InvalidPositionException {
         if (position < 0 || position > this.length)
@@ -75,7 +105,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         if (position == 0)
             insertHead(data);
         else if (position == this.length)
-            insertRear(data);
+            insertTail(data);
         else {
             NodeDouble<E> newNode = new NodeDouble<>(data, true);
             NodeDouble<E> temp = this.head.getNext();
@@ -89,6 +119,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public E deleteHead() throws EmptyLinkedListException {
         if (isEmpty())
@@ -107,8 +138,9 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /** {@inheritDoc} */
     @Override
-    public E deleteRear() throws EmptyLinkedListException {
+    public E deleteTail() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("Empty list, no elements to delete.");
         if (this.length == 1)
@@ -122,6 +154,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /** {@inheritDoc} */
     @Override
     public E delete(int position) throws EmptyLinkedListException, InvalidPositionException {
         if (isEmpty())
@@ -131,7 +164,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         if (position == 0)
             return deleteHead();
         if (position == this.length - 1)
-            return deleteRear();
+            return deleteTail();
 
         NodeDouble<E> temp = this.head.getNext();
         for (int i = 0; i < position - 1; i++)
@@ -144,6 +177,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /** {@inheritDoc} */
     @Override
     public E deleteBykey(E key) throws EmptyLinkedListException, KeyNotFoundException {
         if (isEmpty())
@@ -152,7 +186,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         if (toDelete == this.head.getNext())
             return deleteHead();
         else if (toDelete == this.tail)
-            return deleteRear();
+            return deleteTail();
         else {
             NodeDouble<E> temp = this.head.getNext();
             E data = toDelete.getData();
@@ -165,6 +199,7 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Node<E> searchByKey(E key) throws KeyNotFoundException {
         NodeDouble<E> temp = this.head.getNext();
@@ -180,36 +215,40 @@ public class DoubleCircularLinkedList<E> implements LinkedList<E> {
     public void createOrderedList(E data) {
     }
 
+    /** {@inheritDoc} */
     @Override
     public void reverse() throws EmptyLinkedListException {
-        if(isEmpty()) throw new EmptyLinkedListException("Empty list, can't reverse.");
+        if (isEmpty())
+            throw new EmptyLinkedListException("Empty list, can't reverse.");
         NodeDouble<E> current, previous, next;
         previous = next = null;
         current = this.head.getNext();
-        do{
+        do {
             next = current.getNext();
             current.setPrev(next);
             current.setNext(previous);
             previous = current;
             current = next;
-        }while(current != this.head.getNext());
+        } while (current != this.head.getNext());
         this.tail = this.head.getNext();
         this.head.setNext(previous);
         this.tail.setNext(this.head.getNext());
         this.head.getNext().setPrev(this.tail);
     }
 
+    /** {@inheritDoc} */
     @Override
     public LinkedList<E> copyList() {
         DoubleCircularLinkedList<E> copy = new DoubleCircularLinkedList<>();
         NodeDouble<E> original = this.head.getNext();
-        do{
-            copy.insertRear(original.getData());
+        do {
+            copy.insertTail(original.getData());
             original = original.getNext();
-        }while(original != this.head.getNext());
+        } while (original != this.head.getNext());
         return copy;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void display() throws EmptyLinkedListException {
         if (isEmpty())

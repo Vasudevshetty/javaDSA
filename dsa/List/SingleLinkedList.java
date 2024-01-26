@@ -4,28 +4,45 @@ import dsa.list.Exception.EmptyLinkedListException;
 import dsa.list.Exception.InvalidPositionException;
 import dsa.list.Exception.KeyNotFoundException;
 
+/**
+ * This class is a implemetnation of the linkedlist interface where it is only
+ * connected by a single link and
+ * unidirectional, operations on tail will end up taking linear time and at head
+ * it is constant.
+ */
 public class SingleLinkedList<E> implements LinkedList<E> {
     private NodeSingle<E> head;
     private int length;
 
-    public SingleLinkedList() {
-        this.head = null;
-        this.length = 0;
-    }
-
     // getters and setters.
+    /**
+     * The function find and access the head.
+     * 
+     * @return the refernce to head.
+     */
     public NodeSingle<E> getHead() {
         return this.head;
     }
 
+    /**
+     * function to set the head.
+     * 
+     * @param head the new head to be's refernce.
+     */
     public void setHead(NodeSingle<E> head) {
         this.head = head;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public int getLength() {
         return this.length;
     } // you can't set the length of the linked list.
 
+    /**
+     * {@inheritDoc}
+     */
     public void insertHead(E data) {
         NodeSingle<E> newNode = new NodeSingle<>(data);
 
@@ -39,7 +56,10 @@ public class SingleLinkedList<E> implements LinkedList<E> {
     }
 
     // insert at head.
-    public void insertRear(E data) {
+    /**
+     * {@inheritDoc}
+     */
+    public void insertTail(E data) {
         if (this.isEmpty()) {
             insertHead(data);
             return;
@@ -56,7 +76,10 @@ public class SingleLinkedList<E> implements LinkedList<E> {
 
     }
 
-    // extra function to insert at rear part of the list.
+    /**
+     * {@inheritDoc}
+     */
+    // extra function to insert at Tail part of the list.
     public void insert(E data, int position) throws InvalidPositionException {
         if (position < 0 || position > this.length)
             throw new InvalidPositionException("Invalid position to insert.\n");
@@ -65,7 +88,7 @@ public class SingleLinkedList<E> implements LinkedList<E> {
             return;
         }
         if (position == this.length - 1) {
-            insertRear(data);
+            insertTail(data);
             return;
         }
 
@@ -82,6 +105,9 @@ public class SingleLinkedList<E> implements LinkedList<E> {
 
     } // overloaded function to accept the position and insert.
 
+    /**
+     * {@inheritDoc}
+     */
     public E deleteHead() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
@@ -97,7 +123,10 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         return data;
     } // function to remove at head part of the list.
 
-    public E deleteRear() throws EmptyLinkedListException {
+    /**
+     * {@inheritDoc}
+     */
+    public E deleteTail() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
 
@@ -111,8 +140,11 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         this.length--;
 
         return data;
-    } // function to remove at rear part of the list.
+    } // function to remove at Tail part of the list.
 
+    /**
+     * {@inheritDoc}
+     */
     public E delete(int position) throws EmptyLinkedListException, InvalidPositionException {
         if (isEmpty())
             throw new InvalidPositionException("Invalid position to insert.\n");
@@ -122,7 +154,7 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         if (position == 0)
             return deleteHead();
         if (position == this.length - 1)
-            return deleteRear();
+            return deleteTail();
 
         NodeSingle<E> temp = this.head;
         for (int i = 0; i < position - 1; i++)
@@ -137,6 +169,9 @@ public class SingleLinkedList<E> implements LinkedList<E> {
 
     } // function to remove from position.
 
+    /**
+     * {@inheritDoc}
+     */
     public Node<E> searchByKey(E key) throws KeyNotFoundException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to search.\n");
@@ -150,6 +185,9 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         throw new KeyNotFoundException("key not found");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public E deleteBykey(E key) throws EmptyLinkedListException, KeyNotFoundException {
         NodeSingle<E> toDelete = (NodeSingle<E>) searchByKey(key);
         E data = toDelete.getData();
@@ -168,10 +206,16 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void createOrderedList(E data) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void reverse() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to reverse");
@@ -189,13 +233,16 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         this.head = prevNode;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public LinkedList<E> copyList() {
         SingleLinkedList<E> copy = new SingleLinkedList<>();
 
         NodeSingle<E> temp = this.head;
 
         while (temp != null) {
-            copy.insertRear(temp.getData());
+            copy.insertTail(temp.getData());
             temp = temp.getNext();
         }
         return copy;
@@ -221,6 +268,9 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         return data.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void display() throws EmptyLinkedListException {
         NodeSingle<E> temp = this.head;
         // check whether the list is empty

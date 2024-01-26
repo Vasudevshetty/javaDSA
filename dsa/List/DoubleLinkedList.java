@@ -4,6 +4,12 @@ import dsa.list.Exception.EmptyLinkedListException;
 import dsa.list.Exception.InvalidPositionException;
 import dsa.list.Exception.KeyNotFoundException;
 
+/**
+ * This class is a implemetnation of the linkedlist interface where it is only
+ * connected by a double link,
+ * bidirectional, operations on tail will end up taking linear time and at head
+ * it is constant.
+ */
 public class DoubleLinkedList<E> implements LinkedList<E> {
     private NodeDouble<E> head;
     private NodeDouble<E> tail;
@@ -29,10 +35,16 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         this.tail = tail;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public int getLength() {
         return this.length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void insertHead(E data) {
         NodeDouble<E> newNode = new NodeDouble<>(data);
 
@@ -47,7 +59,10 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         this.length++;
     }
 
-    public void insertRear(E data) {
+    /**
+     * {@inheritDoc}
+     */
+    public void insertTail(E data) {
         if (this.head == null) {
             insertHead(data);
             return;
@@ -62,6 +77,9 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         this.length++;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void insert(E data, int position) throws InvalidPositionException {
         if (position < 0 || position > this.length)
             throw new InvalidPositionException("Invalid position, Insertion failed.\n" + position);
@@ -71,7 +89,7 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
             return;
         }
         if (position == this.length) {
-            insertRear(data);
+            insertTail(data);
             return;
         }
 
@@ -88,6 +106,9 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         this.length++;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public E deleteHead() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
@@ -97,8 +118,8 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
 
         setHead(toDelete.getNext());
 
-        if (toDelete.getNext() == null){
-            this.head = null;   
+        if (toDelete.getNext() == null) {
+            this.head = null;
             this.tail = null;
         }
 
@@ -106,7 +127,10 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
-    public E deleteRear() throws EmptyLinkedListException {
+    /**
+     * {@inheritDoc}
+     */
+    public E deleteTail() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
 
@@ -123,6 +147,9 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public E delete(int position) throws InvalidPositionException, EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to delete.\n");
@@ -132,7 +159,7 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         if (position == 0)
             return deleteHead();
         if (position == this.length - 1)
-            return deleteRear();
+            return deleteTail();
 
         NodeDouble<E> temp = this.head;
         for (int i = 0; i < position - 1; i++)
@@ -148,6 +175,9 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Node<E> searchByKey(E key) {
         if (isEmpty())
             throw new EmptyLinkedListException("No elements to search.\n");
@@ -161,6 +191,9 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         throw new KeyNotFoundException("key not found");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public E deleteBykey(E key) {
         NodeDouble<E> toDelete = (NodeDouble<E>) searchByKey(key);
         E data = toDelete.getData();
@@ -179,18 +212,24 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         return data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public LinkedList<E> copyList() {
         DoubleLinkedList<E> copy = new DoubleLinkedList<>();
 
         NodeDouble<E> temp = this.head;
 
         while (temp != null) {
-            copy.insertRear(temp.getData());
+            copy.insertTail(temp.getData());
             temp = temp.getNext();
         }
         return copy;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void reverse() {
         if (isEmpty())
             throw new EmptyLinkedListException("List is empty to reverse.\n");
@@ -212,10 +251,16 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         this.head = prev;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void createOrderedList(E data) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isEmpty() {
         return this.head == null && this.length == 0;
     }
@@ -234,6 +279,9 @@ public class DoubleLinkedList<E> implements LinkedList<E> {
         return data.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void display() throws EmptyLinkedListException {
         if (isEmpty())
             throw new EmptyLinkedListException("List is empty, No elements to display");

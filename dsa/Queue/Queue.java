@@ -17,7 +17,7 @@ public class Queue<E> implements Que<E> {
 
     @Override
     public void enqueue(E value) {
-        que.insertRear(value);
+        que.insertTail(value);
     }
 
     @Override
