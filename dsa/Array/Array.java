@@ -1,4 +1,4 @@
-package dsa.Array;
+package dsa.array;
 
 public class Array {
     

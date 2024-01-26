@@ -1,4 +1,4 @@
-package dsa.List.Exception;
+package dsa.list.Exception;
 
 public class KeyNotFoundException extends RuntimeException{
     public KeyNotFoundException(String message){

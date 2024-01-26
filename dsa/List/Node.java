@@ -1,4 +1,4 @@
-package dsa.List;
+package dsa.list;
 
 
 public interface Node<E> {

@@ -1,8 +1,8 @@
-package dsa.List;
+package dsa.list;
 
-import dsa.List.Exception.EmptyLinkedListException;
-import dsa.List.Exception.InvalidPositionException;
-import dsa.List.Exception.KeyNotFoundException;
+import dsa.list.Exception.EmptyLinkedListException;
+import dsa.list.Exception.InvalidPositionException;
+import dsa.list.Exception.KeyNotFoundException;
 
 public class SingleLinkedList<E> implements LinkedList<E> {
     private NodeSingle<E> head;

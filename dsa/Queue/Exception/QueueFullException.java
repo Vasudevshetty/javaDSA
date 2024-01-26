@@ -1,4 +1,4 @@
-package dsa.Queue.Exception;
+package dsa.queue.Exception;
 
 public class QueueFullException extends RuntimeException{
     public QueueFullException(String message){

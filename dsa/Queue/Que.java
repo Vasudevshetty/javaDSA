@@ -1,6 +1,6 @@
-package dsa.Queue;
+package dsa.queue;
 
-import dsa.Queue.Exception.QueueEmptyException;
+import dsa.queue.Exception.QueueEmptyException;
 
 public interface Que<E> {
     public void enqueue(E value);

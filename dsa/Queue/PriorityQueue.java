@@ -1,4 +1,4 @@
-package dsa.Queue;
+package dsa.queue;
 
 public class PriorityQueue {
     

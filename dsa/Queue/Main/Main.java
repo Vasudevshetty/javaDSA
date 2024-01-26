@@ -1,6 +1,6 @@
-package dsa.Queue.Main;
+package dsa.queue.Main;
 
-import dsa.Queue.Queue;
+import dsa.queue.Queue;
 
 public class Main {
     public static void main(String args[]){

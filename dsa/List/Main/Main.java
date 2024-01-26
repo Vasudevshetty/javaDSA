@@ -1,6 +1,6 @@
-package dsa.List.Main;
+package dsa.list.Main;
 
-import dsa.List.DoubleCircularLinkedList;
+import dsa.list.DoubleCircularLinkedList;
 
 public class Main {
     public static void main(String[] args) {

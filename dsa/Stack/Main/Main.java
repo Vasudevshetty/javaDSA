@@ -1,6 +1,6 @@
-package dsa.Stack.Main;
+package dsa.stack.Main;
 
-import dsa.Stack.Stack;
+import dsa.stack.Stack;
 
 public class Main {
     public static void main(String[] args) {

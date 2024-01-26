@@ -1,4 +1,4 @@
-package dsa.List;
+package dsa.list;
 
 public class NodeDouble<E> implements Node<E>{
     private E data;

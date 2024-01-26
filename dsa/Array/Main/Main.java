@@ -1,4 +1,4 @@
-package dsa.Array.Main;
+package dsa.array.Main;
 
 public class Main {
     

@@ -1,7 +1,7 @@
-package dsa.Stack;
+package dsa.stack;
 
-import dsa.Stack.Exception.StackOverflowException;
-import dsa.Stack.Exception.StackUnderflowException;
+import dsa.stack.Exception.StackOverflowException;
+import dsa.stack.Exception.StackUnderflowException;
 
 public class Stack<E> {
     private Object[] array;

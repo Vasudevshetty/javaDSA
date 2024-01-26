@@ -1,4 +1,4 @@
-package dsa.List.Exception;
+package dsa.list.Exception;
 
 public class InvalidPositionException extends RuntimeException{
     public InvalidPositionException(String message){

@@ -1,8 +1,8 @@
-package dsa.Queue;
+package dsa.queue;
 
-import dsa.List.NodeSingle;
-import dsa.List.SingleLinkedList;
-import dsa.Queue.Exception.QueueEmptyException;
+import dsa.list.NodeSingle;
+import dsa.list.SingleLinkedList;
+import dsa.queue.Exception.QueueEmptyException;
 
 public class Queue<E> implements Que<E> {
     private SingleLinkedList<E> que;

@@ -1,4 +1,4 @@
-package dsa.Stack.Exception;
+package dsa.stack.Exception;
 
 public class StackUnderflowException extends RuntimeException {
     public StackUnderflowException(String message){

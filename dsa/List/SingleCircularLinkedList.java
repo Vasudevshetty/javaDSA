@@ -1,6 +1,6 @@
-package dsa.List;
+package dsa.list;
 
-import dsa.List.Exception.*;
+import dsa.list.Exception.*;
 
 public class SingleCircularLinkedList<E> implements LinkedList<E> {
     private NodeSingle<E> head;
