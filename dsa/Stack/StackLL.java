@@ -20,7 +20,7 @@ public class StackLL<E> {
     public E peek() throws StackUnderflowException {
         if (stack.isEmpty())
             throw new StackUnderflowException("Stack is empty to peek.");
-        else return stack.getHead().getNext().getData();
+        else return stack.getHead().getData();
     }
 
     public boolean isEmpty() {

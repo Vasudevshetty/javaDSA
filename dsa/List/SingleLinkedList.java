@@ -32,7 +32,7 @@ public class SingleLinkedList<E> implements LinkedList<E> {
         if (this.head == null) {
             setHead(newNode);
         } else {
-            newNode.setNext(this.head.getNext());
+            newNode.setNext(this.head);
             setHead(newNode);
         }
         this.length++;

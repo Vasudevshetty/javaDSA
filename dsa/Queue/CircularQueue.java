@@ -1,7 +1,5 @@
 package dsa.queue;
 
-import dsa.queue.Exception.QueueEmptyException;
-
 public class CircularQueue<E> implements Que<E>{
     public void enqueue(E value){
 
