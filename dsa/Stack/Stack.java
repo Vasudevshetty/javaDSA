@@ -41,7 +41,7 @@ public class Stack<E> {
     @SuppressWarnings("unchecked")
     public E pop() throws StackUnderflowException {
         if (isEmpty())
-            throw new StackUnderflowException("Stack is full, cannot pop.");
+            throw new StackUnderflowException("Stack is empty, cannot pop.");
         this.length--;
         return (E) this.array[top--];
     }

@@ -20,6 +20,10 @@ public class NotationConvertor {
             return 0;
     }
 
+    public static boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/';
+    }
+
     public static String postfix(String infix) {
         StackLL<Character> stack = new StackLL<>();
         StringBuilder string = new StringBuilder();
@@ -84,6 +88,35 @@ public class NotationConvertor {
     }
 
     /**
+     * The function converts given prefix or postfic expresssion back to infnix expression.
+     * @param expression the expression which has to be converted.
+     * @param notation whether prefix or postfix.
+     * @return the new converted infix string.
+     */
+    public static String infix(String expression, NotationType notation) {
+        StringBuilder string = new StringBuilder();
+        Stack<String> stack = new Stack<>();
+
+        if (notation == NotationType.prefix)
+            expression = new StringBuilder(expression).reverse().toString();
+
+        for (int i = 0; i < expression.length(); i++) {
+            char token = expression.charAt(i);
+            if (isOperand(token))
+                stack.push(String.valueOf(token));
+            else if (isOperator(token)) {
+                String operand1 = stack.pop();
+                String operand2 = stack.pop();
+                String result = notation == NotationType.postfix ? operand2 + token + operand1
+                        : operand1 + token + operand2;
+                stack.push(result);
+            }
+        }
+        string.append(stack.pop());
+        return string.toString();
+    }
+
+    /**
      * This is used for calcualting the value of the operation,
      * 
      * @param operator corresoponds to the operator of the operation.
@@ -109,12 +142,15 @@ public class NotationConvertor {
                 return 0;
         }
     }
-    
+
     /**
-     * This function performs evaultion on the postfix and prefix exprsssion specifiecd and the 
+     * This function performs evaultion on the postfix and prefix exprsssion
+     * specifiecd and the
      * number belong to 0 and 9 only since character wise evalutaion is done.
+     * 
      * @param expression it is the expression which is either prefix or postifx.
-     * @param notation it is a enum which specifies whether it is prefix or postifx.
+     * @param notation   it is a enum which specifies whether it is prefix or
+     *                   postifx.
      * @return the value of evaulted post or prefix expresssions value.
      */
     public static int evaulate(String expression, NotationType notation) {
@@ -125,7 +161,7 @@ public class NotationConvertor {
                     char token = expression.charAt(i);
                     if (isOperand(token))
                         stack.push(token - '0');
-                    else {
+                    else if (isOperator(token)) {
                         int operand1 = stack.pop();
                         int operand2 = stack.pop();
 
@@ -138,7 +174,7 @@ public class NotationConvertor {
                     char token = expression.charAt(i);
                     if (isOperand(token))
                         stack.push(token - '0');
-                    else {
+                    else if (isOperator(token)) {
                         int operand2 = stack.pop();
                         int operand1 = stack.pop();
 
