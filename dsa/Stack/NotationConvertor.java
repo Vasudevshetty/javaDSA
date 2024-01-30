@@ -2,13 +2,22 @@ package dsa.stack;
 
 public class NotationConvertor {
     public enum NotationType {
-        postfix, prefix
+        postfix, prefix, infix
     }
-
+    /**
+     * The function gives whether the given character token is a operand of the expresssion.
+     * @param c the to be checked character
+     * @return the answer to the question.
+     */
     public static boolean isOperand(char c) {
         return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9';
     }
 
+    /**
+     * The function returns the value of the precdence of the operator
+     * @param c the character tokent o be checked.  
+     * @return the precdence of the corresponding character
+     */
     public static int precedence(char c) {
         if (c == '^')
             return 3;
@@ -19,17 +28,59 @@ public class NotationConvertor {
         else
             return 0;
     }
-
+    /**
+     * The function checks the whether the given character token is a operaotr or not.
+     * @param c the character token to be checked.
+     * @return the result of the chekcing
+     */
     public static boolean isOperator(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/';
     }
 
-    public static String postfix(String infix) {
+    /**
+     * This function converts the given expression either in the form of prefix/postfix to postfix or vice versa.
+     * @param expression this the given expression of type prefix or postfix.j
+     * @param to to the notation to be converted.
+     * @return the converted string.
+     */
+    private static String convert(String expression, NotationType to) {
+        StringBuilder string = new StringBuilder();
+        StackLL<String> stack = new StackLL<>();
+
+        if (to == NotationType.prefix)
+            expression = new StringBuilder(expression).reverse().toString();
+
+        for (int i = 0; i < expression.length(); i++) {
+            char token = expression.charAt(i);
+            if (isOperand(token))
+                stack.push(String.valueOf(token));
+            else if (isOperator(token)) {
+                String operand2 = stack.pop();
+                String operand1 = stack.pop();
+                String result = to == NotationType.prefix ? token + operand2 + operand1 : operand1 + operand2 + token;
+
+                stack.push(result);
+            }
+        }
+        string.append(stack.pop());
+        return to == NotationType.prefix ? string.reverse().toString() : string.toString();
+    }
+   
+    /**
+     * The function convertes any type of expression to postfix.
+     * @param expression this is the expression to be converted to postfix.
+     * @param notation gives whether it is a prefix or infix exprssion type.
+     * @return the converted postfix exprssion.
+     */
+    public static String postfix(String expression, NotationType notation) {
+        if (notation == NotationType.prefix)
+            return convert(expression, notation);
+        // else is the infix case.
         StackLL<Character> stack = new StackLL<>();
         StringBuilder string = new StringBuilder();
         int i = 0;
-        while (i < infix.length()) {
-            char token = infix.charAt(i);
+        while (i < expression.length()) {
+            char token = expression.charAt(i);
             if (isOperand(token))
                 string.append(token);
             else if (token == '(')
@@ -52,17 +103,19 @@ public class NotationConvertor {
     }
 
     /**
-     * This function converts given infix notation to postfix notation.
-     * 
+     * This function converts given infix or postfix notation to prefix notatio.
      * @param infix string is passed as the first parameter.
+     * @param notation gives whether the given expression if of postfix or infix type 
      * @return prefix converted string is returned upon conversion.
      */
-    public static String prefix(String infix) {
+    public static String prefix(String expression, NotationType notation) {
+        if (notation == NotationType.postfix)
+            return convert(expression, notation);
         StringBuilder string = new StringBuilder();
         StackLL<Character> stack = new StackLL<>();
-        char[] revInfix = new char[infix.length()];
-        for (int i = infix.length() - 1, k = 0; i >= 0; i--, k++)
-            revInfix[k] = infix.charAt(i);
+        char[] revInfix = new char[expression.length()];
+        for (int i = expression.length() - 1, k = 0; i >= 0; i--, k++)
+            revInfix[k] = expression.charAt(i);
         int i = 0;
         while (i < revInfix.length) {
             char token = revInfix[i];
