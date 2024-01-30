@@ -148,7 +148,7 @@ public class NotationConvertor {
      */
     public static String infix(String expression, NotationType notation) {
         StringBuilder string = new StringBuilder();
-        Stack<String> stack = new Stack<>();
+        StackLL<String> stack = new StackLL<>();
 
         if (notation == NotationType.prefix)
             expression = new StringBuilder(expression).reverse().toString();
