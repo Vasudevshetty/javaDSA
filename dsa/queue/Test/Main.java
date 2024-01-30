@@ -1,4 +1,4 @@
-package dsa.queue.Main;
+package dsa.queue.Test;
 
 import dsa.queue.Queue;
 
