@@ -1,4 +1,4 @@
-package dsa.stack.Main;
+package dsa.stack.Test;
 
 import dsa.stack.NotationConvertor;
 import dsa.stack.NotationConvertor.NotationType;
