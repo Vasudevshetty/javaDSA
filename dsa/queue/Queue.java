@@ -27,18 +27,25 @@ public class Queue<E> implements Que<E> {
         return que.deleteHead();
     }
 
-    @Override
     public int length() {
         return que.getLength();
     }
 
     @Override
-    public E peek() throws QueueEmptyException{
-        if (isEmpty())
-            throw new QueueEmptyException("Queue is empty, no element to peek.\n");
-        return que.getHead().getData();
-    }
+    public E front() {
+        return isEmpty() ? null : que.getHead().getData();
+    } 
 
+    @Override
+    public E rear() {
+        if (isEmpty())
+            return null;
+        NodeSingle<E> temp = que.getHead();
+        while (temp.getNext() != null)
+            temp = temp.getNext();
+        return temp.getData();
+    }
+    
     @Override
     public String toString() {
         if(isEmpty()) throw new QueueEmptyException("Queue is empty, printing failed.\n");
