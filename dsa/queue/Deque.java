@@ -1,6 +1,7 @@
 package dsa.queue;
 
 import dsa.list.DoubleLinkedList;
+import dsa.list.NodeDouble;
 import dsa.queue.Exception.QueueEmptyException;
 
 public class Deque<E> {
@@ -18,7 +19,7 @@ public class Deque<E> {
         que.insertHead(data);
     }
 
-    public void euqueueRear(E data) {
+    public void enqueueRear(E data) {
         que.insertTail(data);
     }
 
@@ -39,5 +40,17 @@ public class Deque<E> {
 
     public E rear() {
         return isEmpty() ? null : que.getTail().getData();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("The elements of the dequeue are, \n");
+        NodeDouble<E> temp = que.getHead();
+        while (temp != null) {
+            string.append(temp.getData()).append(" ");
+            temp = temp.getNext();
+        }
+        return string.toString();
     }
 }
