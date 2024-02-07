@@ -23,7 +23,7 @@ public class CircularQueue<E> implements Que<E> {
         return front == (rear + 1) % capacity;
     }
 
-    public void enqueue(E value) throws QueueFullException{
+    public void enqueue(E value) throws QueueFullException {
         if (!isFull()) {
             array[rear] = value;
             rear = (rear + 1) % capacity;
@@ -32,9 +32,9 @@ public class CircularQueue<E> implements Que<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E dequeue() throws QueueEmptyException{
+    public E dequeue() throws QueueEmptyException {
         if (!isEmpty()) {
-            E data = (E)array[front];
+            E data = (E) array[front];
             front = (front + 1) % capacity;
             return data;
         } else
@@ -51,4 +51,19 @@ public class CircularQueue<E> implements Que<E> {
         return isEmpty() ? null : (E) array[rear];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        if (isEmpty())
+            string.append("Queue is empty.");
+        else {
+            string.append("The elements of the queue are, \n");
+            int i = front;
+            do {
+                string.append(String.valueOf(array[i])).append(" ");
+                i = (i + 1) % capacity;
+            } while (i != rear % capacity);
+        }
+        return string.toString();
+    }
 }
