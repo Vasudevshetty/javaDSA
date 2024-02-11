@@ -4,9 +4,6 @@ Welcome to my Java Data Structures Package! This package provides a collection o
 
 All the classes have generic support, proper Exception handling with good javaDoc, comments and readability.
 
-# Java Data Structures Package
-
-Welcome to the Java Data Structures package! This repository contains custom implementations of various data structures in Java.
 
 ## Table of Contents
 
