@@ -1,13 +1,13 @@
 package dsa.trees.binaryTrees;
 
 /**
- * The abstract class for binary trees, the tree which containing atmost 2
+ * The class for binary trees, the tree which containing atmost 2
  * children i.e -> {0, 1, 2} children.
  * 
  * @author Vasudevshetty
  * @param <E> the type of data field.
  */
-public abstract class BinaryTree<E> {
+public class BinaryTree<E> {
     /** Root of the tree */
     protected TreeNode<E> root;
     /** Height of the binary tree. */
@@ -25,6 +25,7 @@ public abstract class BinaryTree<E> {
      * @return The hieght of the binary tree.
      */
     public int getHeight() {
+        this.height = calculateHeight(this.root);
         return this.height;
     }
 
@@ -34,6 +35,7 @@ public abstract class BinaryTree<E> {
      * @return The nodes count of the binary tree.
      */
     public int getNodeCount() {
+        this.nodeCount = countNodes(this.root);
         return this.nodeCount;
     }
 
@@ -47,27 +49,28 @@ public abstract class BinaryTree<E> {
     }
 
     /**
-     * Funciton to insert a node to the binary tree.
-     * 
-     * @param data to be added
+     * The recuresive functin to calculate the height of the binary tree.
+    * @param node reference to the root.
+     * @return height of the tree
      */
-    public abstract void insert(E data);
+    private int calculateHeight(TreeNode<E> node) {
+        if (node == null)
+            return -1;
+        int heightLeftSubTree = calculateHeight(node.getLeftChild());
+        int heightRightSubTree = calculateHeight(node.getRightChild());
+        return 1 + Math.max(heightLeftSubTree, heightRightSubTree);
+    }
 
     /**
-     * Function to delete a node from the binary tree.
-     * 
-     * @param data to be deleted.
-     * @return true if deleted else false
+     * The recursive functin to calcualte the count of nodes of binary tree.
+     * @param node refernce to root
+     * @return the count of the nodes.
      */
-    public abstract boolean delete(E data);
-
-    /**
-     * Function to serach for a node in the binary tree.
-     * 
-     * @param data to be searched.
-     * @return true if found else false
-     */
-    public abstract boolean search(E data);
+    private int countNodes(TreeNode<E> node) {
+        if (node == null)
+            return 0;
+        return 1 + countNodes(node.getLeftChild()) + countNodes(node.getRightChild());
+    }
 
     /** Inorder traversal of the binary tree. */
     public void inOrder() {
