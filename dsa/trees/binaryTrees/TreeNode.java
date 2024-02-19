@@ -52,6 +52,22 @@ public class TreeNode<E> {
     }
 
     /**
+     * The function to set the left child
+     * @param leftChild reference to the left child
+     */
+    public void setLeftChild(TreeNode<E> leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    /**
+     * The function to set the right child
+     * @param rightChild reference to the right child.
+     */
+    public void setRightChild(TreeNode<E> rightChild) {
+        this.rightChild = rightChild;
+    }
+
+    /**
      * The fucntion is getter method for right child
      * 
      * @return the right child's refernce
