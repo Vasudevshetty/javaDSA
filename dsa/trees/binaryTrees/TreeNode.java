@@ -10,6 +10,9 @@ package dsa.trees.binaryTrees;
 /**
  * The Tree's node structure, it contains a data field, and two refernce members
  * to it's left and right child.
+ * 
+ * @author VasudevShetty
+ * @param <E> the type of data field.
  */
 public class TreeNode<E> {
     /** Data feild of the node */
