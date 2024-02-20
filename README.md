@@ -4,13 +4,14 @@ Welcome to my Java Data Structures Package! This package provides a collection o
 
 All the classes have generic support, proper Exception handling with good javaDoc, comments and readability.
 
-
 ## Table of Contents
 
 1. [Array](https://github.com/Vasudevshetty/javaDSA/tree/main/dsa/array)
+
    - [Array Implementation](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/array/Array.java)
 
 2. [Linked List](https://github.com/Vasudevshetty/javaDSA/tree/main/dsa/list)
+
    - [Single Linked List](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/list/SingleLinkedList.java)
    - [Double Linked List](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/list/DoubleLinkedList.java)
    - [Circular Linked List](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/list/CircularLinkedList.java)
@@ -18,22 +19,26 @@ All the classes have generic support, proper Exception handling with good javaDo
    - [Single Circular Linked List](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/list/SingleCircularLinkedList.java)
 
 3. [Queue](https://github.com/Vasudevshetty/javaDSA/tree/main/dsa/queue)
+
    - [Priority Queue](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/queue/PriorityQueue.java)
    - [Circular Queue](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/queue/CircularQueue.java)
    - [Deque](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/queue/Deque.java)
 
 4. [Stack](https://github.com/Vasudevshetty/javaDSA/tree/main/dsa/stack)
+
    - [Stack Array Implementation](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/stack/StackArray.java)
    - [Stack Linked List Implementation](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/stack/StackLL.java)
    - [Notation Converter](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/stack/NotationConvertor.java)
 
+5. [Trees](https://github.com/Vasudevshetty/javaDSA/tree/main/dsa/trees)
 
-<!-- 6. [Usage](https://github.com/Vasudevshetty/javaDSA#usage)
+   - [Binary Tree Concrete class](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/trees/binaryTrees/BinaryTree.java)
+   - [Expression Tree](https://github.com/Vasudevshetty/javaDSA/blob/main/dsa/trees/applications/ExpresssionTree.java)
+   <!-- 6. [Usage](https://github.com/Vasudevshetty/javaDSA#usage)
 
-7. [Contributing](https://github.com/Vasudevshetty/javaDSA#contributing)
+<!-- 6. [Contributing](https://github.com/Vasudevshetty/javaDSA#contributing)
 
-8. [License](https://github.com/Vasudevshetty/javaDSA/blob/main/LICENSE) -->
-
+7. [License](https://github.com/Vasudevshetty/javaDSA/blob/main/LICENSE) --> 
 
 ## 📦 Data Structures
 
@@ -66,6 +71,37 @@ All the classes have generic support, proper Exception handling with good javaDo
 - **Usage**: `NotationConverter.postfix(Expression, ExpressionType(enum - prefix, postfix or infix));`
 - **Types**: `postfix(expression, infix/prefix) or prefix(expression, infix/postfix) or infix(expression, prefix/postfix)`
 
+### 5. Binary Trees
+
+- **Description**
+The `binaryTrees` sub-repository contains the implementation of generic binary trees with various functionalities.
+
+- **Features** : 
+ Basic binary tree structure with a `TreeNode` class.
+ Generic `BinaryTree` class supporting common tree operations.
+ Designed for flexibility and easy extension.
+
+- **Usage Example**
+```java
+BinaryTree<Integer> tree = new BinaryTree<>();
+TreeNode<Integer> root = new TreeNode<>(5);
+tree.setRoot(root);
+// Perform tree operations...
+```
+### 6. Expression Tree
+
+- **Description**
+The `ExpressionTree` class in the `applications` sub-repository serves as a utility for constructing and manipulating expression trees.
+
+- **Features** :
+   - `ExpressionTree` extends `BinaryTree<Character>` to represent expression trees.
+   - Construction from postfix expressions: `ExpressionTree(String postfixExpression)`.
+
+- **Usage Example**
+```java
+ExpressionTree expressionTree = new ExpressionTree("ab+");
+// Perform expression tree operations...
+```
 
 ## 🚀 Getting Started
 
