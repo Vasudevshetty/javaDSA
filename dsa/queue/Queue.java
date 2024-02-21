@@ -1,14 +1,14 @@
 package dsa.queue;
 
-import dsa.list.NodeSingle;
-import dsa.list.SingleLinkedList;
+import dsa.list.DoubleLinkedList;
+import dsa.list.NodeDouble;
 import dsa.queue.Exception.QueueEmptyException;
 
 public class Queue<E> implements Que<E> {
-    private SingleLinkedList<E> que;
+    private DoubleLinkedList<E> que;
 
     public Queue() {
-        que = new SingleLinkedList<>();
+        que = new DoubleLinkedList<>();
     }
 
     public boolean isEmpty() {
@@ -40,17 +40,14 @@ public class Queue<E> implements Que<E> {
     public E rear() {
         if (isEmpty())
             return null;
-        NodeSingle<E> temp = que.getHead();
-        while (temp.getNext() != null)
-            temp = temp.getNext();
-        return temp.getData();
+        return que.getTail().getData();
     }
     
     @Override
     public String toString() {
         if(isEmpty()) throw new QueueEmptyException("Queue is empty, printing failed.\n");
         StringBuilder queue = new StringBuilder();
-        NodeSingle<E> temp = que.getHead();
+        NodeDouble<E> temp = que.getHead();
         queue.append("Elements of the queue are, \n");
         while (temp != null) {
             queue.append(temp.getData()).append(" ");

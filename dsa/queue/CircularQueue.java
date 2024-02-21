@@ -23,7 +23,7 @@ public class CircularQueue<E> implements Que<E> {
      * To check whether the queue is empty or not.
      * @return 
      */
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return front == rear;
     }
 
@@ -31,7 +31,7 @@ public class CircularQueue<E> implements Que<E> {
      * To check whterht the queue is full or not. 
      * @return
      */
-    boolean isFull() {
+    public boolean isFull() {
         return front == (rear + 1) % capacity;
     }
 
