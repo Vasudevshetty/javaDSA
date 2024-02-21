@@ -1,5 +1,7 @@
 package dsa.trees.binaryTrees;
 
+import dsa.queue.Queue;
+
 /**
  * The class for binary trees, the tree which containing atmost 2
  * children i.e -> {0, 1, 2} children.
@@ -50,7 +52,8 @@ public class BinaryTree<E> {
 
     /**
      * The recuresive functin to calculate the height of the binary tree.
-    * @param node reference to the root.
+     * 
+     * @param node reference to the root.
      * @return height of the tree
      */
     private int calculateHeight(TreeNode<E> node) {
@@ -63,6 +66,7 @@ public class BinaryTree<E> {
 
     /**
      * The recursive functin to calcualte the count of nodes of binary tree.
+     * 
      * @param node refernce to root
      * @return the count of the nodes.
      */
@@ -129,4 +133,17 @@ public class BinaryTree<E> {
         System.out.print(node.getData() + " ");
     }
 
+    public void levelOrder() {
+        TreeNode<E> temp = this.root;
+        Queue<TreeNode<E>> queue = new Queue<>();
+        queue.enqueue(temp);
+        while (temp != null && !queue.isEmpty()) {
+            temp = queue.dequeue();
+            System.out.print(temp.getData() + " ");
+            if (temp.getLeftChild() != null)
+                queue.enqueue(temp.getLeftChild());
+            if (temp.getRightChild() != null)
+                queue.enqueue(temp.getRightChild());
+        }
+    }
 }

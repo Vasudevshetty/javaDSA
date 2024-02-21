@@ -12,5 +12,7 @@ public class Main {
       tree.postOrder();
       System.out.println();
       tree.preOrder();
+      System.out.println();
+      tree.levelOrder();
    } 
 }
