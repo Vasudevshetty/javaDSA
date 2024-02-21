@@ -30,6 +30,8 @@ public class ExpresssionTree extends BinaryTree<String> {
      */
     public ExpresssionTree(String expresssion, Notation notation) {
         this.root = constructExpressionTree(expresssion, notation);
+        this.getNodeCount();
+        this.getHeight();
     }
 
     /**
