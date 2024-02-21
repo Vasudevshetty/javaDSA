@@ -17,6 +17,7 @@ public class BinaryTree<E> {
     /** Count of nodes of the binary tree. */
     protected int nodeCount;
 
+    
     // the necessity of creating a default constructor is not needed ig. (since all
     // the members are assinged to corresponding nulls)
 
@@ -137,7 +138,7 @@ public class BinaryTree<E> {
         TreeNode<E> temp = this.root;
         Queue<TreeNode<E>> queue = new Queue<>();
         queue.enqueue(temp);
-        while (temp != null && !queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             temp = queue.dequeue();
             System.out.print(temp.getData() + " ");
             if (temp.getLeftChild() != null)
