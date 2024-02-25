@@ -15,15 +15,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import dsa.list.DoubleCircularLinkedList;
+import dsa.list.DoubleLinkedList;
 import dsa.list.Exception.EmptyLinkedListException;
+import dsa.list.Exception.InvalidPositionException;
 
 public class ListMenu extends JFrame {
     private JTextField dataField;
     private JLabel instructionLabel;
     private JTextArea outputArea;
     private JButton[] buttons;
-    private DoubleCircularLinkedList<String> list;
+    private DoubleLinkedList<String> list;
 
     public ListMenu() {
         super("Linked List Operations");
@@ -59,7 +60,7 @@ public class ListMenu extends JFrame {
         instructionLabel = new JLabel("Enter the operation: ");
         outputArea = new JTextArea("Your output will be displayed here.");
         buttons = new JButton[11];
-        list = new DoubleCircularLinkedList<>();
+        list = new DoubleLinkedList<>();
 
         buttons[0] = new JButton("Insert At Head");
         buttons[1] = new JButton("Insert At Tail");
@@ -134,103 +135,58 @@ public class ListMenu extends JFrame {
 
         switch (source) {
             case "Insert At Head":
-                data = dataField.getText().trim();
+            case "Insert At Tail":
+            // case "Insert At Specific Position":
+                data = getData("Enter data : ");
                 if (!data.isEmpty()) {
-                    instructionLabel.setText("Enter data : ");
-                    list.insertHead(data);
+                    if (source.equals("Insert At Head")) {
+                        list.insertHead(data);
+                    } else if (source.equals("Insert At Tail")) {
+                        list.insertTail(data);
+                    } else {
+                        position = getPosition();
+                        try {
+                            list.insert(data, position);
+                        } catch (InvalidPositionException e) {
+                            JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                            break;
+                        }
+                    }
                     handleMenu("Display");
                 } else {
                     JOptionPane.showMessageDialog(this, "Please enter valid data.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 break;
-            case "Insert At Tail":
-                data = dataField.getText().trim();
-                if (!data.isEmpty()) {
-                    instructionLabel.setText("Enter data : ");
-                    list.insertTail(data);
-                    this.handleMenu("Display");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please enter valid data.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                break;
-            case "Insert At Specific Position":
-                data = dataField.getText().trim();
-                if (!data.isEmpty()) {
-                    instructionLabel.setText("Enter position : ");
-                    position = Integer.parseInt(data);
-                    instructionLabel.setText("Enter data : ");
-                    data = dataField.getText().trim();
-                    if (!data.isEmpty()) {
-                        list.insert(data, position);
-                        this.handleMenu("Display");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Please enter valid data.", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please enter valid position.", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                break;
             case "Delete At Head":
-                try {
-
-                    list.deleteHead();
-                } catch (EmptyLinkedListException e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                }
-                this.handleMenu("Display");
-                break;
             case "Delete At Tail":
+            // case "Delete At Specific Position":
+            // case "Delete key":
+                if (source.equals("Delete At Specific Position")) {
+                    position = getPosition();
+                    if (position < 0) {
+                        JOptionPane.showMessageDialog(this, "Please enter valid position.", "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } else {
+                    position = -1;
+                }
                 try {
-
-                    list.deleteTail();
+                    performDeleteOperations(source, position);
+                    handleMenu("Display");
                 } catch (EmptyLinkedListException e) {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
                 }
-                this.handleMenu("Display");
-                break;
-            case "Delete At Specific Position":
-                data = dataField.getText().trim();
-                if (!data.isEmpty()) {
-                    position = Integer.parseInt(data);
-                    try {
-                        list.delete(position);
-                    } catch (EmptyLinkedListException e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                        break;
-                    }
-                    this.handleMenu("Display");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please enter valid position.", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                break;
-            case "Delete key":
-                data = dataField.getText().trim();
-                if (!data.isEmpty()) {
-                    try {
-                        list.deleteBykey(data);
-                    } catch (EmptyLinkedListException e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                        break;
-                    }
-                    this.handleMenu("Display");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please enter valid key.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                break;
-            case "Search Key":
-                data = dataField.getText().trim();
-                if (!data.isEmpty()) {
-                    list.searchByKey(data);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please enter valid key.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                }
-                break;
+            // case "Search Key":
+            //     data = dataField.getText().trim();
+            //     if (!data.isEmpty()) {
+            //         list.searchByKey(data);
+            //     } else {
+            //         JOptionPane.showMessageDialog(this, "Please enter valid key.", "Error", JOptionPane.ERROR_MESSAGE);
+            //         break;
+            //     }
+            //     break;
             case "Reverse":
                 try {
                     list.reverse();
@@ -240,23 +196,52 @@ public class ListMenu extends JFrame {
                 }
                 this.handleMenu("Display");
                 break;
-            case "Copy":
-                @SuppressWarnings("Unchecked")
-                DoubleCircularLinkedList<String> copy = new DoubleCircularLinkedList<>();
-                try {
+            // case "Copy":
+            //     @SuppressWarnings("Unchecked")
+            //     DoubleLinkedList<String> copy = new DoubleLinkedList<>();
+            //     try {
 
-                    copy = (DoubleCircularLinkedList<String>) list.copyList();
-                } catch (EmptyLinkedListException e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                this.handleMenu(copy.toString());
-                break;
+            //         copy = (DoubleLinkedList<String>) list.copyList();
+            //         handleMenu("Display");
+            //     } catch (EmptyLinkedListException e) {
+            //         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            //     }
+            //     this.handleMenu(copy.toString());
+            //     break;
             case "Display":
                 try {
                     outputArea.setText(list.toString());
                 } catch (EmptyLinkedListException e) {
                     JOptionPane.showMessageDialog(this, "Empty list cannot be displayed");
                 }
+                break;
+        }
+
+    }
+
+    private String getData(String instruction) {
+        instructionLabel.setText(instruction);
+        return dataField.getText().trim();
+    }
+
+    private int getPosition() {
+        instructionLabel.setText("Enter position: ");
+        return Integer.parseInt(dataField.getText().trim());
+    }
+
+    private void performDeleteOperations(String soruce, int position) throws EmptyLinkedListException {
+        switch (soruce) {
+            case "Delete At Head":
+                list.deleteHead();
+                break;
+            case "Delete At Tail":
+                list.deleteTail();
+                break;
+            case "Delete At Speific Position":
+                list.delete(position);
+                break;
+            case "Delete Key":
+                list.deleteBykey(dataField.getText().trim());
                 break;
         }
     }
