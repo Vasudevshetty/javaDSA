@@ -2,8 +2,9 @@ package gui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,9 +24,9 @@ public class ListMenu extends JFrame {
 
         this.initaliseComponents();
 
-        this.setLayout(new GridLayout());
+        this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        
+
         JPanel inputOutputPanel = createInputPanel();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -33,6 +34,13 @@ public class ListMenu extends JFrame {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.NORTH;
         this.add(inputOutputPanel, constraints);
+
+        JPanel buttonPanel = createButtonPanel();
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.fill = GridBagConstraints.BOTH;
+        this.add(buttonPanel, constraints);
 
         this.setSize(500, 500);
         this.setMaximumSize(this.getSize());
@@ -80,6 +88,31 @@ public class ListMenu extends JFrame {
         constraints.fill = GridBagConstraints.BOTH;
         inputOutputPanel.add(outputLabel, constraints);
         return inputOutputPanel;
+    }
+
+    private JPanel createButtonPanel() {
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].addActionListener(new ButtonListener());
+            constraints.gridx = i % 2;
+            constraints.gridy = i / 2;
+            constraints.fill = GridBagConstraints.HORIZONTAL;
+            constraints.ipadx = 20;
+            constraints.ipady = 10;
+            constraints.insets = new Insets(5, 10, 5, 10);
+            buttonPanel.add(buttons[i], constraints);
+        }
+
+        return buttonPanel;
+    }
+
+    private class ButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 
     public static void main(String[] args) {
