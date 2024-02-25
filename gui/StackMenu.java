@@ -13,7 +13,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 
-import dsa.stack.StackLL;
+import dsa.stack.StackArray;
+import dsa.stack.Exception.StackUnderflowException;
 
 import javax.swing.JButton;
 
@@ -22,7 +23,7 @@ public class StackMenu extends JFrame {
     private JTextArea outputTextArea;
     private JTextField inputTextField;
 
-    private StackLL<String> stack;
+    private StackArray<String> stack;
 
     String data;
 
@@ -32,6 +33,35 @@ public class StackMenu extends JFrame {
         initComponents();
         setupLayout();
 
+        push.addActionListener((ActionEvent e) -> {
+            data = inputTextField.getText().trim();
+            if (!data.isEmpty()) {
+                stack.push(data);
+                this.updateOutput();
+            } else {
+                JOptionPane.showMessageDialog(this, "Please enter valid data", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        pop.addActionListener((ActionEvent e) -> {
+            if (stack.isEmpty())
+                JOptionPane.showMessageDialog(this, "Stack Empty, no elements to pop.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            try {
+                stack.pop();
+                updateOutput();
+            } catch (StackUnderflowException ex) {
+                outputTextArea.setText(ex.getMessage());
+            }
+        });
+
+        peek.addActionListener((ActionEvent e) -> {
+            if (stack.isEmpty())
+                JOptionPane.showMessageDialog(this, "Stack empty, no elements to peek.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            else
+                outputTextArea.setText("The top(peeked) element of the stack is " + stack.peek());
+        });
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 500);
@@ -42,7 +72,7 @@ public class StackMenu extends JFrame {
         push = new JButton("Push");
         pop = new JButton("Pop");
         peek = new JButton("Peek");
-        stack = new StackLL<>();
+        stack = new StackArray<>();
         outputTextArea = new JTextArea("The output will be visible here.");
         outputTextArea.setEditable(false);
         outputTextArea.setWrapStyleWord(true);
@@ -82,6 +112,7 @@ public class StackMenu extends JFrame {
 
     private void updateOutput() {
         outputTextArea.setText(stack.toString());
+        inputTextField.setText("");
     }
 
     public static void main(String[] args) {
