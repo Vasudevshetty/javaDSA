@@ -80,16 +80,19 @@ public class BinaryTree<E> {
     /** Inorder traversal of the binary tree. */
     public void inOrder() {
         inorder(this.root);
+        System.out.println();
     }
 
     /** Preorder traversal of the binary tree. */
     public void preOrder() {
         preorder(this.root);
+        System.out.println();
     }
 
     /** Postorder traversal of the binary tree. */
     public void postOrder() {
         postorder(this.root);
+        System.out.println();
     }
 
     /**
