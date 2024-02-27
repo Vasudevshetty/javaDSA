@@ -1,6 +1,7 @@
 package dsa.trees.Test;
 
 import dsa.trees.BinarySearchTree;
+import dsa.trees.binaryTrees.TraversalGenerator;
 
 public class Main {
    public static void main(String[] args) {
@@ -13,10 +14,16 @@ public class Main {
       tree.insert(6);
       tree.insert(7);
 
-      tree.preOrder();
+      System.out.println(TraversalGenerator.inOrder(tree));
       tree.inOrder();
+      System.out.println(TraversalGenerator.preOrder(tree));
+      tree.preOrder();
+      System.out.println(TraversalGenerator.postOrder(tree));
       tree.postOrder();
+      System.out.println(TraversalGenerator.levelOrder(tree));
+      tree.levelOrder();
 
+      System.out.println();
       System.out.println(tree.getHeight() + " " + tree.getNodeCount());
    }
 }
