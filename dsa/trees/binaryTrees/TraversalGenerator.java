@@ -2,16 +2,17 @@ package dsa.trees.binaryTrees;
 
 import dsa.queue.Queue;
 import dsa.stack.StackLL;
+import java.util.ArrayList;
 
 public class TraversalGenerator<E> {
-    public static <E> String preOrder(BinaryTree<E> tree) {
+    public static <E> ArrayList<E> preOrder(BinaryTree<E> tree) {
         StackLL<TreeNode<E>> stack = new StackLL<>();
         TreeNode<E> temp = tree.getRoot();
-        StringBuilder traversal = new StringBuilder();
+        ArrayList<E> traversal = new ArrayList<>();
 
         while (temp != null || !stack.isEmpty()) {
             if (temp != null) {
-                traversal.append(temp.getData());
+                traversal.add(temp.getData());
                 stack.push(temp);
                 temp = temp.getLeftChild();
             } else {
@@ -19,13 +20,13 @@ public class TraversalGenerator<E> {
                 temp = temp.getRightChild();
             }
         }
-        return traversal.toString();
+        return traversal;
     }
 
-    public static <E> String postOrder(BinaryTree<E> tree) {
+    public static <E> ArrayList<E> postOrder(BinaryTree<E> tree) {
         StackLL<TreeNode<E>> stack = new StackLL<>();
         StackLL<E> data = new StackLL<>();
-        StringBuilder traversal = new StringBuilder();
+        ArrayList<E> traversal = new ArrayList<>();
 
         stack.push(tree.getRoot());
         while (!stack.isEmpty()) {
@@ -37,15 +38,15 @@ public class TraversalGenerator<E> {
                 stack.push(temp.getRightChild());
         }
         while (!data.isEmpty())
-            traversal.append(data.pop());
+            traversal.add(data.pop());
 
-        return traversal.toString();
+        return traversal;
     }
 
-    public static <E> String inOrder(BinaryTree<E> tree) {
+    public static <E> ArrayList<E> inOrder(BinaryTree<E> tree) {
         StackLL<TreeNode<E>> stack = new StackLL<>();
         TreeNode<E> temp = tree.getRoot();
-        StringBuilder traversal = new StringBuilder();
+        ArrayList<E> traversal = new ArrayList<>();
 
         while (temp != null || !stack.isEmpty()) {
             if (temp != null) {
@@ -53,28 +54,28 @@ public class TraversalGenerator<E> {
                 temp = temp.getLeftChild();
             } else {
                 temp = stack.pop();
-                traversal.append(temp.getData());
+                traversal.add(temp.getData());
                 temp = temp.getRightChild();
             }
         }
-        return traversal.toString();
+        return traversal;
     }
 
-    public static <E> String levelOrder(BinaryTree<E> tree) {
-        StringBuilder traversal = new StringBuilder();
+    public static <E> ArrayList<E> levelOrder(BinaryTree<E> tree) {
+        ArrayList<E> traversal = new ArrayList<>();
         Queue<TreeNode<E>> queue = new Queue<>();
         TreeNode<E> temp = tree.getRoot();
 
         queue.enqueue(temp);
         while (!queue.isEmpty()) {
             temp = queue.dequeue();
-            traversal.append(temp.getData());
+            traversal.add(temp.getData());
 
             if (temp.getLeftChild() != null)
                 queue.enqueue(temp.getLeftChild());
             if (temp.getRightChild() != null)
                 queue.enqueue(temp.getRightChild());
         }
-        return traversal.toString();
+        return traversal;
     }
 }
