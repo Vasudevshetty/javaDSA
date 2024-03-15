@@ -5,7 +5,7 @@ import dsa.trees.binaryTrees.TreeNode;
 
 public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
     public void insert(E data) {
-        this.root = insertR(root, data);
+        this.root = insertR(this.root, data);
     }
 
     private TreeNode<E> insertR(TreeNode<E> root, E data) {
@@ -16,7 +16,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
 
         if (data.compareTo(root.getData()) < 0)
             root.setLeftChild(insertR(root.getLeftChild(), data));
-        else if (data.compareTo(root.getData()) > 0)
+        else if (data.compareTo(root.getData()) >= 0)
             root.setRightChild(insertR(root.getRightChild(), data));
 
         return root;

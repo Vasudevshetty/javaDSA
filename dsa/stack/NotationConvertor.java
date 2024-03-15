@@ -4,8 +4,11 @@ public class NotationConvertor {
     public enum NotationType {
         postfix, prefix, infix
     }
+
     /**
-     * The function gives whether the given character token is a operand of the expresssion.
+     * The function gives whether the given character token is a operand of the
+     * expresssion.
+     * 
      * @param c the to be checked character
      * @return the answer to the question.
      */
@@ -15,7 +18,8 @@ public class NotationConvertor {
 
     /**
      * The function returns the value of the precdence of the operator
-     * @param c the character tokent o be checked.  
+     * 
+     * @param c the character tokent o be checked.
      * @return the precdence of the corresponding character
      */
     public static int precedence(char c) {
@@ -28,8 +32,11 @@ public class NotationConvertor {
         else
             return 0;
     }
+
     /**
-     * The function checks the whether the given character token is a operaotr or not.
+     * The function checks the whether the given character token is a operaotr or
+     * not.
+     * 
      * @param c the character token to be checked.
      * @return the result of the chekcing
      */
@@ -38,9 +45,11 @@ public class NotationConvertor {
     }
 
     /**
-     * This function converts the given expression either in the form of prefix/postfix to postfix or vice versa.
+     * This function converts the given expression either in the form of
+     * prefix/postfix to postfix or vice versa.
+     * 
      * @param expression this the given expression of type prefix or postfix.j
-     * @param to to the notation to be converted.
+     * @param to         to the notation to be converted.
      * @return the converted string.
      */
     private static String convert(String expression, NotationType to) {
@@ -65,11 +74,12 @@ public class NotationConvertor {
         string.append(stack.pop());
         return to == NotationType.prefix ? string.reverse().toString() : string.toString();
     }
-   
+
     /**
      * The function convertes any type of expression to postfix.
+     * 
      * @param expression this is the expression to be converted to postfix.
-     * @param notation gives whether it is a prefix or infix exprssion type.
+     * @param notation   gives whether it is a prefix or infix exprssion type.
      * @return the converted postfix exprssion.
      */
     public static String postfix(String expression, NotationType notation) {
@@ -104,8 +114,10 @@ public class NotationConvertor {
 
     /**
      * This function converts given infix or postfix notation to prefix notatio.
-     * @param infix string is passed as the first parameter.
-     * @param notation gives whether the given expression if of postfix or infix type 
+     * 
+     * @param infix    string is passed as the first parameter.
+     * @param notation gives whether the given expression if of postfix or infix
+     *                 type
      * @return prefix converted string is returned upon conversion.
      */
     public static String prefix(String expression, NotationType notation) {
@@ -141,9 +153,11 @@ public class NotationConvertor {
     }
 
     /**
-     * The function converts given prefix or postfic expresssion back to infnix expression.
+     * The function converts given prefix or postfic expresssion back to infnix
+     * expression.
+     * 
      * @param expression the expression which has to be converted.
-     * @param notation whether prefix or postfix.
+     * @param notation   whether prefix or postfix.
      * @return the new converted infix string.
      */
     public static String infix(String expression, NotationType notation) {
@@ -208,36 +222,22 @@ public class NotationConvertor {
      */
     public static int evaulate(String expression, NotationType notation) {
         StackLL<Integer> stack = new StackLL<>();
-        switch (notation) {
-            case prefix:
-                for (int i = expression.length() - 1; i >= 0; i--) {
-                    char token = expression.charAt(i);
-                    if (isOperand(token))
-                        stack.push(token - '0');
-                    else if (isOperator(token)) {
-                        int operand1 = stack.pop();
-                        int operand2 = stack.pop();
 
-                        stack.push(calculate(token, operand1, operand2));
-                    }
-                }
-                return stack.peek();
-            case postfix:
-                for (int i = 0; i < expression.length(); i++) {
-                    char token = expression.charAt(i);
-                    if (isOperand(token))
-                        stack.push(token - '0');
-                    else if (isOperator(token)) {
-                        int operand2 = stack.pop();
-                        int operand1 = stack.pop();
+        for (int i = 0; i < expression.length(); i++) {
+            char token = notation == NotationType.prefix ? expression.charAt(expression.length() - 1 - i)
+                    : expression.charAt(i);
+            if (isOperand(token))
+                stack.push(token - '0');
+            else if (isOperator(token)) {
+                int operand2 = stack.pop();
+                int operand1 = stack.pop();
 
-                        stack.push(calculate(token, operand1, operand2));
-                    }
-                }
-                return stack.peek();
-            default:
-                throw new IllegalArgumentException("Illegal notation type please specify.");
+                int result = notation == NotationType.prefix ? calculate(token, operand2, operand1)
+                        : calculate(token, operand1, operand2);
+                        
+                stack.push(result);
+            }
         }
-
+        return stack.pop();
     }
 }
